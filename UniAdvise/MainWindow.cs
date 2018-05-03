@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SbsSW.SwiPlCs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,29 @@ namespace UniAdvise {
     public partial class MainWindow : Form {
         public MainWindow() {
             InitializeComponent();
+            //var curPath = Environment.GetEnvironmentVariable("PATH");
+            Environment.SetEnvironmentVariable("SWI_HOME_DIR", @"C:\Program Files\swipl");
+            Environment.SetEnvironmentVariable("PATH", @"C:\Program Files\swipl");
+            Environment.SetEnvironmentVariable("PATH", @"C:\Program Files\swipl\bin");
+            if (!PlEngine.IsInitialized) {
+                String[] param = { "-q", "-f", @"family.pl" };  // suppressing informational and banner messages
+                PlEngine.Initialize(param);
+                PlQuery.PlCall("assert(father(martin, inka))");
+                PlQuery.PlCall("assert(father(uwe, gloria))");
+                PlQuery.PlCall("assert(father(uwe, melanie))");
+                PlQuery.PlCall("assert(father(uwe, ayala))");
+                using (PlQuery q = new PlQuery("father(P, C), atomic_list_concat([P,' is_father_of ',C], L)")) {
+                    foreach (PlQueryVariables v in q.SolutionVariables)
+                        Console.WriteLine(v["L"].ToString());
+
+                    Console.WriteLine("all child's from uwe:");
+                    q.Variables["P"].Unify("uwe");
+                    foreach (PlQueryVariables v in q.SolutionVariables)
+                        Console.WriteLine(v["C"].ToString());
+                }
+                PlEngine.PlCleanup();
+                Console.WriteLine("finshed!");
+            }
         }
 
 
