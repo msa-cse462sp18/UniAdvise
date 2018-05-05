@@ -14,7 +14,7 @@ namespace UniAdvise {
         public MainWindow() {
             InitializeComponent();
             var prolog = new PrologEngine(persistentCommandHistory: false);
-            prolog.Consult("family.pl");
+            prolog.Consult("courses.pl");
 
             /*// 'socrates' is human.
             prolog.ConsultFromString("human(socrates).");
@@ -22,10 +22,19 @@ namespace UniAdvise {
             prolog.ConsultFromString("mortal(X) :- human(X).");*/
 
             // Question: Shall 'socrates' die?
-            var solution = prolog.GetFirstSolution(query: "male(X).");
-            SolutionSet solution2 = prolog.GetAllSolutions("family.pl", "male(X).");
-            Console.WriteLine(solution2[0]); // = "True" (Yes!)
-            Console.WriteLine(solution.Solved); // = "True" (Yes!)
+            //var solution = prolog.GetFirstSolution(query: "prereq(ece462,ZZZ).");
+            SolutionSet solution2 = prolog.GetAllSolutions("courses.pl", "prereq(ece462,ZZZ).");
+            //Console.WriteLine(solution2[0]); // = "True" (Yes!)
+            //Console.WriteLine(string.Join(",", solution2));
+            for (int i = 0; i < solution2.Count; i++) // or: foreach (Solution s in ss.NextSolution)
+        {
+                Solution s = solution2[i];
+                Console.WriteLine("Solution {0}", i + 1);
+
+                foreach (Variable v in s.NextVariable)
+                    Console.WriteLine(string.Format("{0} ({1}) = {2}", v.Name, v.Type, v.Value));
+            }
+            //Console.WriteLine(solution.Solved); // = "True" (Yes!)
         }
 
 
