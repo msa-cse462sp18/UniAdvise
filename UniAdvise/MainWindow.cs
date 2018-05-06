@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UniAdvise {
+namespace UniAdvise {//it's me
     public partial class MainWindow : Form {
         public MainWindow() {
             InitializeComponent();
