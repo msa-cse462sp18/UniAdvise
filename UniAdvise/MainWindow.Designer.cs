@@ -37,13 +37,20 @@
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.idLabel = new System.Windows.Forms.Label();
+            this.loginLabel = new System.Windows.Forms.Label();
             this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.loginButton = new System.Windows.Forms.Button();
+            this.idText = new System.Windows.Forms.TextBox();
+            this.passwordText = new System.Windows.Forms.TextBox();
             this.header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.image1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuDragControl1
@@ -117,9 +124,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(3, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(37, 38);
+            this.pictureBox2.Size = new System.Drawing.Size(57, 41);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -129,7 +136,7 @@
             this.bunifuCustomLabel1.AutoSize = true;
             this.bunifuCustomLabel1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.White;
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(46, 10);
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(66, 9);
             this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
             this.bunifuCustomLabel1.Size = new System.Drawing.Size(228, 19);
             this.bunifuCustomLabel1.TabIndex = 0;
@@ -146,6 +153,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.passwordText);
+            this.panel2.Controls.Add(this.idText);
+            this.panel2.Controls.Add(this.loginButton);
+            this.panel2.Controls.Add(this.passwordLabel);
+            this.panel2.Controls.Add(this.idLabel);
+            this.panel2.Controls.Add(this.loginLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -153,12 +166,72 @@
             this.panel2.TabIndex = 7;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // passwordLabel
+            // 
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.ForeColor = System.Drawing.Color.White;
+            this.passwordLabel.Location = new System.Drawing.Point(171, 222);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(123, 26);
+            this.passwordLabel.TabIndex = 0;
+            this.passwordLabel.Text = "Password:";
+            this.passwordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idLabel.ForeColor = System.Drawing.Color.White;
+            this.idLabel.Location = new System.Drawing.Point(171, 149);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(38, 26);
+            this.idLabel.TabIndex = 0;
+            this.idLabel.Text = "id:";
+            this.idLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // loginLabel
+            // 
+            this.loginLabel.AutoSize = true;
+            this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginLabel.ForeColor = System.Drawing.Color.White;
+            this.loginLabel.Location = new System.Drawing.Point(328, 20);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(118, 44);
+            this.loginLabel.TabIndex = 0;
+            this.loginLabel.Text = "Login";
+            this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // bunifuDragControl2
             // 
             this.bunifuDragControl2.Fixed = true;
             this.bunifuDragControl2.Horizontal = true;
             this.bunifuDragControl2.TargetControl = null;
             this.bunifuDragControl2.Vertical = true;
+            // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(270, 303);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(243, 52);
+            this.loginButton.TabIndex = 1;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // idText
+            // 
+            this.idText.Location = new System.Drawing.Point(321, 149);
+            this.idText.Name = "idText";
+            this.idText.Size = new System.Drawing.Size(266, 20);
+            this.idText.TabIndex = 2;
+            // 
+            // passwordText
+            // 
+            this.passwordText.Location = new System.Drawing.Point(321, 222);
+            this.passwordText.Name = "passwordText";
+            this.passwordText.Size = new System.Drawing.Size(266, 20);
+            this.passwordText.TabIndex = 2;
             // 
             // MainWindow
             // 
@@ -178,6 +251,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -193,6 +268,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl2;
+        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.Label loginLabel;
+        private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.TextBox passwordText;
+        private System.Windows.Forms.TextBox idText;
+        private System.Windows.Forms.Button loginButton;
     }
 }
 

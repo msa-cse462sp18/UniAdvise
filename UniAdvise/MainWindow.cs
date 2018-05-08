@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace UniAdvise {//it's me
     public partial class MainWindow : Form {
+        Database1Entities dbContext = new Database1Entities();
+
         public MainWindow() {
             InitializeComponent();
             var prolog = new PrologEngine(persistentCommandHistory: false);
@@ -23,16 +25,22 @@ namespace UniAdvise {//it's me
 
             // Question: Shall 'socrates' die?
             //var solution = prolog.GetFirstSolution(query: "prereq(ece462,ZZZ).");
-            SolutionSet solution2 = prolog.GetAllSolutions("courses.pl", "prereq(ece462,ZZZ).");
+            SolutionSet solution2 = prolog.GetAllSolutions("courses.pl", "course(ZZZ).");
             //Console.WriteLine(solution2[0]); // = "True" (Yes!)
             //Console.WriteLine(string.Join(",", solution2));
             for (int i = 0; i < solution2.Count; i++) // or: foreach (Solution s in ss.NextSolution)
         {
                 Solution s = solution2[i];
-                Console.WriteLine("Solution {0}", i + 1);
-
-                foreach (Variable v in s.NextVariable)
-                    Console.WriteLine(string.Format("{0} ({1}) = {2}", v.Name, v.Type, v.Value));
+                Variable abc = s.NextVariable.ToList()[0];
+                Console.WriteLine(abc.Value);
+                //Create Course
+                /*using (var dbContext = new Database1Entities()) {
+                    var records = dbContext.Set<courses>();
+                    records.Add(new courses {
+                        course_name = abc.Value
+                    });
+                    dbContext.SaveChanges();
+                }*/
             }
             //Console.WriteLine(solution.Solved); // = "True" (Yes!)
         }
@@ -88,5 +96,8 @@ namespace UniAdvise {//it's me
 
         }
 
+        private void loginButton_Click(object sender, EventArgs e) {
+            //dbContext.
+        }
     }
 }
