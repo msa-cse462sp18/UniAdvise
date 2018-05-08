@@ -21,7 +21,9 @@ namespace UniAdvise
         }
     
         public int course_id { get; set; }
+        public string course_code { get; set; }
         public string course_name { get; set; }
+        public string course_semester { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<studentcourse> studentcourses { get; set; }

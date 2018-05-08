@@ -214,7 +214,7 @@
             this.loginButton.Location = new System.Drawing.Point(270, 303);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(243, 52);
-            this.loginButton.TabIndex = 1;
+            this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
@@ -224,17 +224,18 @@
             this.idText.Location = new System.Drawing.Point(321, 149);
             this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(266, 20);
-            this.idText.TabIndex = 2;
+            this.idText.TabIndex = 0;
             // 
             // passwordText
             // 
             this.passwordText.Location = new System.Drawing.Point(321, 222);
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(266, 20);
-            this.passwordText.TabIndex = 2;
+            this.passwordText.TabIndex = 1;
             // 
             // MainWindow
             // 
+            this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(46)))), ((int)(((byte)(59)))));

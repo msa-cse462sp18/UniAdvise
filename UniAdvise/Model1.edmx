@@ -10,7 +10,9 @@
             <PropertyRef Name="course_id" />
           </Key>
           <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="course_name" Type="nchar" MaxLength="10" />
+          <Property Name="course_code" Type="nchar" MaxLength="10" />
+          <Property Name="course_name" Type="varchar" MaxLength="50" />
+          <Property Name="course_semester" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="studentcourse">
           <Key>
@@ -93,7 +95,9 @@
             <PropertyRef Name="course_id" />
           </Key>
           <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="course_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="course_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="course_semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="studentcourses" Relationship="Database1Model.FK_boundary1" FromRole="course" ToRole="studentcourse" />
         </EntityType>
         <EntityType Name="studentcourse">
@@ -145,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -154,7 +158,9 @@
           <EntitySetMapping Name="courses">
             <EntityTypeMapping TypeName="Database1Model.course">
               <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="course_semester" ColumnName="course_semester" />
                 <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
                 <ScalarProperty Name="course_id" ColumnName="course_id" />
               </MappingFragment>
             </EntityTypeMapping>

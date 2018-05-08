@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 namespace UniAdvise {//it's me
     public partial class MainWindow : Form {
-        Database1Entities dbContext = new Database1Entities();
+        Database1Entities dbContext;
 
         public MainWindow() {
             InitializeComponent();
+            dbContext = new Database1Entities();
             var prolog = new PrologEngine(persistentCommandHistory: false);
             prolog.Consult("courses.pl");
 
@@ -25,14 +26,15 @@ namespace UniAdvise {//it's me
 
             // Question: Shall 'socrates' die?
             //var solution = prolog.GetFirstSolution(query: "prereq(ece462,ZZZ).");
-            SolutionSet solution2 = prolog.GetAllSolutions("courses.pl", "course(ZZZ).");
+            SolutionSet solution2 = prolog.GetAllSolutions("courses.pl", "prereq(ece561,ZZZ).");
             //Console.WriteLine(solution2[0]); // = "True" (Yes!)
             //Console.WriteLine(string.Join(",", solution2));
-            for (int i = 0; i < solution2.Count; i++) // or: foreach (Solution s in ss.NextSolution)
-        {
-                Solution s = solution2[i];
+            //for (int i = 0; i < solution2.Count; i++){
+                /*Solution s = solution2[i];
                 Variable abc = s.NextVariable.ToList()[0];
-                Console.WriteLine(abc.Value);
+                if (abc.Value == "ZZZ")
+                    continue;
+                Console.WriteLine(abc.Value);*/
                 //Create Course
                 /*using (var dbContext = new Database1Entities()) {
                     var records = dbContext.Set<courses>();
@@ -41,7 +43,7 @@ namespace UniAdvise {//it's me
                     });
                     dbContext.SaveChanges();
                 }*/
-            }
+            //}
             //Console.WriteLine(solution.Solved); // = "True" (Yes!)
         }
 
@@ -97,7 +99,22 @@ namespace UniAdvise {//it's me
         }
 
         private void loginButton_Click(object sender, EventArgs e) {
-            //dbContext.
+            /*if(dbContext.user.Any(x => x.username == idText.Text && x.password == passwordText.Text)) {
+                Console.WriteLine("EXIST"); // = "True" (Yes!)
+            } else {
+                Console.WriteLine("No Exist"); // = "True" (Yes!)
+            }*/
+            var result = dbContext.users.FirstOrDefault(x => x.username == idText.Text && x.password == passwordText.Text);
+            if (result != null) {
+                Console.WriteLine("EXIST"); // = "True" (Yes!)
+                StudentAdvise myForm = new StudentAdvise();
+                myForm.mystudent = result;
+                this.Hide();
+                myForm.ShowDialog();
+                this.Close();
+            } else {
+                Console.WriteLine("No Exist"); // = "True" (Yes!)
+            }
         }
     }
 }
