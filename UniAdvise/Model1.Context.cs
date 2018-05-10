@@ -26,6 +26,7 @@ namespace UniAdvise
         }
     
         public virtual DbSet<course> courses { get; set; }
+        public virtual DbSet<prereq> prereqs { get; set; }
         public virtual DbSet<studentcourse> studentcourses { get; set; }
         public virtual DbSet<user> users { get; set; }
     }

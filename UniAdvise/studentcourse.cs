@@ -15,7 +15,7 @@ namespace UniAdvise
     public partial class studentcourse
     {
         public int Id { get; set; }
-        public int course_id { get; set; }
+        public string course_code { get; set; }
         public int student_id { get; set; }
         public string course_state { get; set; }
     

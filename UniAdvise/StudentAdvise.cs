@@ -108,7 +108,8 @@ namespace UniAdvise {//it's me
         private void dropButton_Click(object sender, EventArgs e) {
             if (dbContext.courses.Any(x => x.course_code == courseCode.Text.ToLower())) {
                 var mycors = dbContext.courses.First(x => x.course_code == courseCode.Text.ToLower());
-                if (dbContext.studentcourses.Any(x => x.student_id == mystudent.user_id && x.course_id == mycors.course_id)) {
+                if (dbContext.studentcourses.Any(x => x.student_id == mystudent.user_id && x.course_code == mycors.course_code
+                && x.course_state == "in progress")) {
                     List<string> mypre = opensCourse(courseCode.Text.ToLower());
                     if (mypre.Count == 0) {
                         resultText.Text = "Droping this course will not prevent you from taking any course.";

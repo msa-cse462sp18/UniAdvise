@@ -54,7 +54,7 @@ course(ece464).
 course(ece465).
 course(ece466).
 
-course(ece551).
+course(ese551).
 course(ece552).
 course(ece553x).
 course(ece554).
@@ -77,7 +77,7 @@ prereq(eng256,eng166).
 
 prereq(mat261,mat161).
 prereq(ese262,bsc252).
-prereq(ese263,ese254).
+prereq(ese263,ese253).
 prereq(ece264,ece254).
 prereq(com265,com255).
 prereq(soc266,eng256).
@@ -105,7 +105,7 @@ prereq(ece454,ece364).
 prereq(ece455,ece365).
 prereq(cse456,cse362).
 
-prereq(ece461,ece541).
+prereq(ece461,ece451).
 prereq(ece462,ece452).
 prereq(ece462,mat361).
 prereq(ece464,ece454).

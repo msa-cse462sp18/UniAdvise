@@ -37,13 +37,13 @@
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.prereqButton = new System.Windows.Forms.Button();
-            this.resultText = new System.Windows.Forms.Label();
             this.courseCode = new System.Windows.Forms.TextBox();
-            this.futureButton = new System.Windows.Forms.Button();
-            this.dropButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.resultText = new System.Windows.Forms.Label();
+            this.dropButton = new System.Windows.Forms.Button();
+            this.futureButton = new System.Windows.Forms.Button();
+            this.prereqButton = new System.Windows.Forms.Button();
+            this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.image1)).BeginInit();
@@ -123,7 +123,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Image = global::UniAdvise.Properties.Resources.msa2;
             this.pictureBox2.Location = new System.Drawing.Point(3, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(57, 41);
@@ -166,23 +166,24 @@
             this.panel2.TabIndex = 7;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // bunifuDragControl2
+            // courseCode
             // 
-            this.bunifuDragControl2.Fixed = true;
-            this.bunifuDragControl2.Horizontal = true;
-            this.bunifuDragControl2.TargetControl = null;
-            this.bunifuDragControl2.Vertical = true;
+            this.courseCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.courseCode.Location = new System.Drawing.Point(358, 48);
+            this.courseCode.Name = "courseCode";
+            this.courseCode.Size = new System.Drawing.Size(284, 32);
+            this.courseCode.TabIndex = 2;
             // 
-            // prereqButton
+            // label1
             // 
-            this.prereqButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prereqButton.Location = new System.Drawing.Point(12, 148);
-            this.prereqButton.Name = "prereqButton";
-            this.prereqButton.Size = new System.Drawing.Size(227, 58);
-            this.prereqButton.TabIndex = 0;
-            this.prereqButton.Text = "What are the prerequisites for this course?";
-            this.prereqButton.UseVisualStyleBackColor = true;
-            this.prereqButton.Click += new System.EventHandler(this.prereqButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(31, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(302, 26);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Enter Course Code Here ->";
             // 
             // resultText
             // 
@@ -195,13 +196,16 @@
             this.resultText.Text = "The Result";
             this.resultText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // courseCode
+            // dropButton
             // 
-            this.courseCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.courseCode.Location = new System.Drawing.Point(358, 48);
-            this.courseCode.Name = "courseCode";
-            this.courseCode.Size = new System.Drawing.Size(284, 32);
-            this.courseCode.TabIndex = 2;
+            this.dropButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dropButton.Location = new System.Drawing.Point(529, 148);
+            this.dropButton.Name = "dropButton";
+            this.dropButton.Size = new System.Drawing.Size(226, 58);
+            this.dropButton.TabIndex = 0;
+            this.dropButton.Text = "What courses would not open if I drop this course?";
+            this.dropButton.UseVisualStyleBackColor = true;
+            this.dropButton.Click += new System.EventHandler(this.dropButton_Click);
             // 
             // futureButton
             // 
@@ -214,27 +218,23 @@
             this.futureButton.UseVisualStyleBackColor = true;
             this.futureButton.Click += new System.EventHandler(this.futureButton_Click);
             // 
-            // dropButton
+            // prereqButton
             // 
-            this.dropButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dropButton.Location = new System.Drawing.Point(529, 148);
-            this.dropButton.Name = "dropButton";
-            this.dropButton.Size = new System.Drawing.Size(226, 58);
-            this.dropButton.TabIndex = 0;
-            this.dropButton.Text = "What courses would not open if I drop this course?";
-            this.dropButton.UseVisualStyleBackColor = true;
-            this.dropButton.Click += new System.EventHandler(this.dropButton_Click);
+            this.prereqButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prereqButton.Location = new System.Drawing.Point(12, 148);
+            this.prereqButton.Name = "prereqButton";
+            this.prereqButton.Size = new System.Drawing.Size(227, 58);
+            this.prereqButton.TabIndex = 0;
+            this.prereqButton.Text = "What are the prerequisites for this course?";
+            this.prereqButton.UseVisualStyleBackColor = true;
+            this.prereqButton.Click += new System.EventHandler(this.prereqButton_Click);
             // 
-            // label1
+            // bunifuDragControl2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(31, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(302, 26);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Enter Course Code Here ->";
+            this.bunifuDragControl2.Fixed = true;
+            this.bunifuDragControl2.Horizontal = true;
+            this.bunifuDragControl2.TargetControl = null;
+            this.bunifuDragControl2.Vertical = true;
             // 
             // StudentAdvise
             // 

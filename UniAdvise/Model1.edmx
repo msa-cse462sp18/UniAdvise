@@ -7,19 +7,26 @@
     <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="course">
           <Key>
-            <PropertyRef Name="course_id" />
+            <PropertyRef Name="course_code" />
           </Key>
-          <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="course_code" Type="nchar" MaxLength="10" />
+          <Property Name="course_code" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="course_name" Type="varchar" MaxLength="50" />
           <Property Name="course_semester" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="prereq">
+          <Key>
+            <PropertyRef Name="prereq_id" />
+          </Key>
+          <Property Name="prereq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="prerequisite_code" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="studentcourse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="course_code" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="student_id" Type="int" Nullable="false" />
           <Property Name="course_state" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -39,10 +46,10 @@
           <End Role="studentcourse" Type="Self.studentcourse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="course">
-              <PropertyRef Name="course_id" />
+              <PropertyRef Name="course_code" />
             </Principal>
             <Dependent Role="studentcourse">
-              <PropertyRef Name="course_id" />
+              <PropertyRef Name="course_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -60,8 +67,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="pre_boundary5">
+          <End Role="course" Type="Self.course" Multiplicity="1" />
+          <End Role="prereq" Type="Self.prereq" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="prereq">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pre_boundary6">
+          <End Role="course" Type="Self.course" Multiplicity="1" />
+          <End Role="prereq" Type="Self.prereq" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="prereq">
+              <PropertyRef Name="prerequisite_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Database1ModelStoreContainer">
           <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prereq" EntityType="Self.prereq" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="studentcourse" EntityType="Self.studentcourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_boundary1" Association="Self.FK_boundary1">
@@ -72,6 +104,14 @@
             <End Role="user" EntitySet="user" />
             <End Role="studentcourse" EntitySet="studentcourse" />
           </AssociationSet>
+          <AssociationSet Name="pre_boundary5" Association="Self.pre_boundary5">
+            <End Role="course" EntitySet="course" />
+            <End Role="prereq" EntitySet="prereq" />
+          </AssociationSet>
+          <AssociationSet Name="pre_boundary6" Association="Self.pre_boundary6">
+            <End Role="course" EntitySet="course" />
+            <End Role="prereq" EntitySet="prereq" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -79,11 +119,20 @@
       <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="courses" EntityType="Database1Model.course" />
+          <EntitySet Name="prereqs" EntityType="Database1Model.prereq" />
           <EntitySet Name="studentcourses" EntityType="Database1Model.studentcourse" />
           <EntitySet Name="users" EntityType="Database1Model.user" />
           <AssociationSet Name="FK_boundary1" Association="Database1Model.FK_boundary1">
             <End Role="course" EntitySet="courses" />
             <End Role="studentcourse" EntitySet="studentcourses" />
+          </AssociationSet>
+          <AssociationSet Name="pre_boundary5" Association="Database1Model.pre_boundary5">
+            <End Role="course" EntitySet="courses" />
+            <End Role="prereq" EntitySet="prereqs" />
+          </AssociationSet>
+          <AssociationSet Name="pre_boundary6" Association="Database1Model.pre_boundary6">
+            <End Role="course" EntitySet="courses" />
+            <End Role="prereq" EntitySet="prereqs" />
           </AssociationSet>
           <AssociationSet Name="FK_boundary2" Association="Database1Model.FK_boundary2">
             <End Role="user" EntitySet="users" />
@@ -92,20 +141,31 @@
         </EntityContainer>
         <EntityType Name="course">
           <Key>
-            <PropertyRef Name="course_id" />
+            <PropertyRef Name="course_code" />
           </Key>
-          <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="course_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="course_code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="course_semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="studentcourses" Relationship="Database1Model.FK_boundary1" FromRole="course" ToRole="studentcourse" />
+          <NavigationProperty Name="prereqs" Relationship="Database1Model.pre_boundary5" FromRole="course" ToRole="prereq" />
+          <NavigationProperty Name="prereqs1" Relationship="Database1Model.pre_boundary6" FromRole="course" ToRole="prereq" />
+        </EntityType>
+        <EntityType Name="prereq">
+          <Key>
+            <PropertyRef Name="prereq_id" />
+          </Key>
+          <Property Name="prereq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="prerequisite_code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="course" Relationship="Database1Model.pre_boundary5" FromRole="prereq" ToRole="course" />
+          <NavigationProperty Name="course1" Relationship="Database1Model.pre_boundary6" FromRole="prereq" ToRole="course" />
         </EntityType>
         <EntityType Name="studentcourse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="course_code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="student_id" Type="Int32" Nullable="false" />
           <Property Name="course_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="course" Relationship="Database1Model.FK_boundary1" FromRole="studentcourse" ToRole="course" />
@@ -128,10 +188,34 @@
           <End Type="Database1Model.studentcourse" Role="studentcourse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="course">
-              <PropertyRef Name="course_id" />
+              <PropertyRef Name="course_code" />
             </Principal>
             <Dependent Role="studentcourse">
-              <PropertyRef Name="course_id" />
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pre_boundary5">
+          <End Type="Database1Model.course" Role="course" Multiplicity="1" />
+          <End Type="Database1Model.prereq" Role="prereq" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="prereq">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pre_boundary6">
+          <End Type="Database1Model.course" Role="course" Multiplicity="1" />
+          <End Type="Database1Model.prereq" Role="prereq" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="prereq">
+              <PropertyRef Name="prerequisite_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -161,7 +245,15 @@
                 <ScalarProperty Name="course_semester" ColumnName="course_semester" />
                 <ScalarProperty Name="course_name" ColumnName="course_name" />
                 <ScalarProperty Name="course_code" ColumnName="course_code" />
-                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prereqs">
+            <EntityTypeMapping TypeName="Database1Model.prereq">
+              <MappingFragment StoreEntitySet="prereq">
+                <ScalarProperty Name="prerequisite_code" ColumnName="prerequisite_code" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="prereq_id" ColumnName="prereq_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -170,7 +262,7 @@
               <MappingFragment StoreEntitySet="studentcourse">
                 <ScalarProperty Name="course_state" ColumnName="course_state" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

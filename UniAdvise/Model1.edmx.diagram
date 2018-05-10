@@ -5,10 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="41af3522c6694a629ec43097ebb09fe1" Name="Diagram1">
-        <EntityTypeShape EntityType="Database1Model.course" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="Database1Model.studentcourse" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="Database1Model.user" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="Database1Model.course" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="Database1Model.prereq" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="Database1Model.studentcourse" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="Database1Model.user" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="Database1Model.FK_boundary1" />
+        <AssociationConnector Association="Database1Model.pre_boundary5" />
+        <AssociationConnector Association="Database1Model.pre_boundary6" />
         <AssociationConnector Association="Database1Model.FK_boundary2" />
       </Diagram>
     </edmx:Diagrams>

@@ -18,14 +18,19 @@ namespace UniAdvise
         public course()
         {
             this.studentcourses = new HashSet<studentcourse>();
+            this.prereqs = new HashSet<prereq>();
+            this.prereqs1 = new HashSet<prereq>();
         }
     
-        public int course_id { get; set; }
         public string course_code { get; set; }
         public string course_name { get; set; }
         public string course_semester { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<studentcourse> studentcourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prereq> prereqs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prereq> prereqs1 { get; set; }
     }
 }
